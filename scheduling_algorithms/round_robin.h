@@ -4,23 +4,24 @@
 #include <deque>
 #include <iostream>
 
-#include "scheduler.h"
+#include "../scheduler.h"
 
 using namespace std;
 
 class RoundRobin: public Scheduler {
 
+private:
     int timeToNextSched = 0;
     deque<int> readyProcesses;
-
-public:
-    RoundRobin(int timeQuantum) {
-        timeToNextSched = timeQuantum;
-    }
 
 protected:
     void run() {
         cout << "Round Robin started" << endl;
+    }
+
+public:
+    RoundRobin(int timeQuantum) {
+        timeToNextSched = timeQuantum;
     }
 
 };
