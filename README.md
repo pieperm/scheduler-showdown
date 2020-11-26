@@ -2,10 +2,10 @@
 This project is designed to be an extension to the previous programming assignment Scheduler Showdown. The goal is to expand on the existing project by implementing more types of processes and more scheduling algorithms. 
 
 The original assignment included:
-- Round-Robin 
-- Shortest Process Next 
-- Shortest Remaining Time
-- Highest Response Ratio Next. 
+- Round-Robin (RR)
+- Shortest Process Next (SPN)
+- Shortest Remaining Time (SRT)
+- Highest Response Ratio Next (HRRN)
 
 New scheduling algorithms will also include:
 - First-In First-Out Scheduling (FIFO)
