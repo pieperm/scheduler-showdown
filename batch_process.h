@@ -3,10 +3,17 @@
 
 #include "process.h"
 
+/**
+ * Class representing a batch process
+ * Child class of Process
+ */
 class BatchProcess: public Process {
 
 public:
 
+    /**
+     * Constructor for a batch process
+     */
     BatchProcess() {
         processType = BATCH;
     }

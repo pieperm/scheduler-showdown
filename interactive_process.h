@@ -5,14 +5,19 @@
 
 using namespace std;
 
+/**
+ * Class representing an interactive process
+ * Child class of Process
+ */
 class InteractiveProcess: public Process {
-
-private:
-
-    int priority;
 
 public:
 
+    int priority;  // priority is unique to interactive processes
+
+    /**
+     * Constructor for an interactive process
+     */
     InteractiveProcess() {
         processType = INTERACTIVE;
         priority = 1;

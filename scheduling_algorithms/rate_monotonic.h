@@ -1,20 +1,20 @@
-#ifndef EARLIEST_DEADLINE_FIRST_H
-#define EARLIEST_DEADLINE_FIRST_H
+#ifndef RATE_MONOTONIC_H
+#define RATE_MONOTONIC_H
 
 #include "../scheduler.h"
 #include "../process.h"
 #include "../realtime_process.h"
 
 /**
- * Scheduler that implements the Earliest Deadline First (EDF) algorithm
- * EDF is a preemptive scheduling algorithm
+ * Scheduler that implements the Rate Monotonic (RM) algorithm
+ * RM is a preemptive scheduling algorithm
  */
-class EarliestDeadlineFirst: public Scheduler {
+class RateMonotonic: public Scheduler {
 
 public:
 
     /**
-     * Chooses the process with the shortest amount of time before its deadline
+     * Chooses the process with the lowest period
      * @param currentProcess The index of the current process, or -1 if the CPU is free
      * @param currentTime The total time accumulated by the CPU so far
      * @param processList The list of processes for the scheduler to choose from
@@ -23,19 +23,20 @@ public:
     int run(int currentProcess, int currentTime, vector<Process*>& processList) {
 
         int index = -1;
-        int minDeadline = 9999999;
+        int minPeriod = 9999999;
 
         for(unsigned int i = 0; i < processList.size(); i++) {
 
             RealtimeProcess* process = reinterpret_cast<RealtimeProcess*>(processList.at(i));
             // only consider processes that have arrived and are not done
             if(process->hasArrived && !process->isDone) {
-                // Get the process with the minimum deadline
-                if(process->deadline < minDeadline) {
-                    index = i;  // select the process
-                    minDeadline = process->deadline;  // update the minimum
+                // find process with the minimum period
+                if(process->period < minPeriod) {
+                    index = i;
+                    minPeriod = process->period;
                 }
             }
+
         }
 
         return index;
@@ -44,4 +45,4 @@ public:
 
 };
 
-#endif //EARLIEST_DEADLINE_FIRST_H
+#endif //RATE_MONOTONIC_H
